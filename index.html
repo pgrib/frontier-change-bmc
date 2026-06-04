@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontier Change — Business Model Canvas</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0D0D1A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 32px;
+    -webkit-font-smoothing: antialiased;
+    color: #FAFAFA;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    max-width: 900px;
+    margin-bottom: 48px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #6EE7B7;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    background: linear-gradient(135deg, #FFFFFF 0%, #6EE7B7 40%, #3B82F6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-sub strong {
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+  }
+
+  /* ── Manifesto strip ── */
+  .manifesto {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 1400px;
+    margin-bottom: 48px;
+  }
+
+  .manifesto-pill {
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 12.5px;
+    font-weight: 600;
+    border: 1px solid rgba(110,231,183,0.25);
+    background: rgba(110,231,183,0.06);
+    color: #6EE7B7;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+
+  .manifesto-pill:hover {
+    background: rgba(110,231,183,0.15);
+    border-color: rgba(110,231,183,0.5);
+    transform: translateY(-2px);
+  }
+
+  /* ── Canvas Grid ── */
+  .canvas {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.3fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 2px;
+    max-width: 1400px;
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* Grid placement */
+  .cell-partners   { grid-column: 1; grid-row: 1 / 3; }
+  .cell-activities { grid-column: 2; grid-row: 1; }
+  .cell-resources  { grid-column: 2; grid-row: 2; }
+  .cell-value      { grid-column: 3; grid-row: 1 / 3; }
+  .cell-relations  { grid-column: 4; grid-row: 1; }
+  .cell-channels   { grid-column: 4; grid-row: 2; }
+  .cell-segments   { grid-column: 5; grid-row: 1 / 3; }
+  .cell-costs      { grid-column: 1 / 4; grid-row: 3; }
+  .cell-revenue    { grid-column: 4 / 6; grid-row: 3; }
+
+  .cell {
+    background: rgba(13,13,26,0.85);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+  }
+
+  .cell-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cell-label .icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  /* Colour accents per cell */
+  .cell-partners .cell-label   { color: #A78BFA; }
+  .cell-partners .icon         { background: rgba(167,139,250,0.15); }
+  .cell-activities .cell-label { color: #F472B6; }
+  .cell-activities .icon       { background: rgba(244,114,182,0.15); }
+  .cell-resources .cell-label  { color: #FB923C; }
+  .cell-resources .icon        { background: rgba(251,146,60,0.15); }
+  .cell-value .cell-label      { color: #6EE7B7; }
+  .cell-value .icon            { background: rgba(110,231,183,0.15); }
+  .cell-relations .cell-label  { color: #38BDF8; }
+  .cell-relations .icon        { background: rgba(56,189,248,0.15); }
+  .cell-channels .cell-label   { color: #FACC15; }
+  .cell-channels .icon         { background: rgba(250,204,21,0.15); }
+  .cell-segments .cell-label   { color: #F87171; }
+  .cell-segments .icon         { background: rgba(248,113,113,0.15); }
+  .cell-costs .cell-label      { color: #94A3B8; }
+  .cell-costs .icon            { background: rgba(148,163,184,0.15); }
+  .cell-revenue .cell-label    { color: #34D399; }
+  .cell-revenue .icon          { background: rgba(52,211,153,0.15); }
+
+  .cell ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cell li {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.55;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .cell li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  .cell-partners li::before   { background: #A78BFA; }
+  .cell-activities li::before { background: #F472B6; }
+  .cell-resources li::before  { background: #FB923C; }
+  .cell-value li::before      { background: #6EE7B7; }
+  .cell-relations li::before  { background: #38BDF8; }
+  .cell-channels li::before   { background: #FACC15; }
+  .cell-segments li::before   { background: #F87171; }
+  .cell-costs li::before      { background: #94A3B8; }
+  .cell-revenue li::before    { background: #34D399; }
+
+  /* Value Prop special treatment */
+  .cell-value {
+    background: linear-gradient(160deg, rgba(110,231,183,0.08) 0%, rgba(59,130,246,0.06) 100%);
+    position: relative;
+  }
+
+  .cell-value::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-left: 2px solid rgba(110,231,183,0.2);
+    border-right: 2px solid rgba(110,231,183,0.2);
+    pointer-events: none;
+  }
+
+  .vp-headline {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    line-height: 1.25;
+    color: #FFFFFF;
+    margin-bottom: 6px;
+  }
+
+  .vp-tagline {
+    font-size: 13px;
+    color: rgba(110,231,183,0.7);
+    font-weight: 500;
+    font-style: italic;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  /* ── Customer Zero section ── */
+  .customer-zero {
+    max-width: 1400px;
+    width: 100%;
+    margin-top: 48px;
+  }
+
+  .cz-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .cz-header h2 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #FFFFFF;
+  }
+
+  .cz-header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 6px;
+  }
+
+  .cz-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .cz-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .cz-card:hover {
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .cz-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    font-size: 100px;
+    font-weight: 900;
+    opacity: 0.04;
+    color: white;
+    line-height: 1;
+  }
+
+  .cz-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cz-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0D0D1A;
+  }
+
+  .cz-card:nth-child(1) .cz-avatar { background: #A78BFA; }
+  .cz-card:nth-child(1) .cz-name   { color: #A78BFA; }
+  .cz-card:nth-child(2) .cz-avatar { background: #F472B6; }
+  .cz-card:nth-child(2) .cz-name   { color: #F472B6; }
+  .cz-card:nth-child(3) .cz-avatar { background: #38BDF8; }
+  .cz-card:nth-child(3) .cz-name   { color: #38BDF8; }
+  .cz-card:nth-child(4) .cz-avatar { background: #FB923C; }
+  .cz-card:nth-child(4) .cz-name   { color: #FB923C; }
+
+  .cz-quote {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  /* ── Experience Principles strip ── */
+  .experience-strip {
+    max-width: 1400px;
+    width: 100%;
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  .experience-strip h2 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+  }
+
+  .experience-strip .sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 28px;
+  }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    text-align: left;
+  }
+
+  .exp-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s ease;
+  }
+
+  .exp-card:hover {
+    border-color: rgba(110,231,183,0.3);
+    background: rgba(110,231,183,0.04);
+  }
+
+  .exp-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .exp-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .exp-desc {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  /* ── Platform layer ── */
+  .platform-strip {
+    max-width: 1400px;
+    width: 100%;
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 32px 0;
+  }
+
+  .platform-node {
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    text-align: center;
+  }
+
+  .pn-frontier {
+    background: linear-gradient(135deg, rgba(110,231,183,0.15), rgba(59,130,246,0.15));
+    border: 1px solid rgba(110,231,183,0.3);
+    color: #6EE7B7;
+    font-size: 18px;
+    padding: 20px 36px;
+  }
+
+  .pn-iq {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+  }
+
+  .platform-arrow {
+    color: rgba(255,255,255,0.2);
+    font-size: 18px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 56px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 1100px) {
+    .canvas {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .cell-partners   { grid-column: 1; grid-row: 1; }
+    .cell-activities { grid-column: 2; grid-row: 1; }
+    .cell-resources  { grid-column: 1; grid-row: 2; }
+    .cell-value      { grid-column: 2; grid-row: 2; }
+    .cell-relations  { grid-column: 1; grid-row: 3; }
+    .cell-channels   { grid-column: 2; grid-row: 3; }
+    .cell-segments   { grid-column: 1 / 3; grid-row: 4; }
+    .cell-costs      { grid-column: 1; grid-row: 5; }
+    .cell-revenue    { grid-column: 2; grid-row: 5; }
+
+    .cz-grid { grid-template-columns: 1fr 1fr; }
+    .exp-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<div class="hero">
+  <div class="hero-eyebrow">Business Model Canvas</div>
+  <h1>Frontier Change</h1>
+  <p class="hero-sub">
+    The intelligence layer on top of <strong>WorkIQ</strong>, <strong>FabricIQ</strong> &amp; <strong>FoundryIQ</strong> that transforms organisations into Frontier Firms — where AI is deeply embedded, every person is expanded, and change isn't managed… it just <em>happens</em>.
+  </p>
+</div>
+
+<!-- ═══════════════ MANIFESTO PILLS ═══════════════ -->
+<div class="manifesto">
+  <span class="manifesto-pill">The HUMANS are coming!</span>
+  <span class="manifesto-pill">The Frontier Firm is amazing!</span>
+  <span class="manifesto-pill">This will enable the rise of humanity!</span>
+  <span class="manifesto-pill">Your People will grow your business in THEIR OWN WAY!</span>
+  <span class="manifesto-pill">The Frontier Firm will expand their TIME!</span>
+  <span class="manifesto-pill">We will give meaning and worth to your people!</span>
+  <span class="manifesto-pill">AI is the unlock that allows you to find the human inside</span>
+  <span class="manifesto-pill">Experience your true self in the Frontier Firm!</span>
+</div>
+
+<!-- ═══════════════ BMC GRID ═══════════════ -->
+<div class="canvas">
+
+  <!-- KEY PARTNERS -->
+  <div class="cell cell-partners">
+    <div class="cell-label"><span class="icon">🤝</span> Key Partners</div>
+    <ul>
+      <li><strong>WorkIQ</strong> — organisational signals, behavioural data, real-time adoption telemetry</li>
+      <li><strong>FabricIQ</strong> — data & analytics fabric, unified intelligence layer</li>
+      <li><strong>FoundryIQ</strong> — AI model orchestration, agent infrastructure, capability deployment</li>
+      <li><strong>Microsoft Copilot ecosystem</strong> — M365, Azure AI, Viva platform</li>
+      <li><strong>Pioneers Club community</strong> — cross-industry frontier practitioners &amp; early adopters</li>
+      <li><strong>Behavioural science & design partners</strong> — nudge architecture, experience design</li>
+    </ul>
+  </div>
+
+  <!-- KEY ACTIVITIES -->
+  <div class="cell cell-activities">
+    <div class="cell-label"><span class="icon">⚡</span> Key Activities</div>
+    <ul>
+      <li>Pre-change simulation — deliver the change before the change even happens</li>
+      <li>Real-time change orchestration powered by organisational signals</li>
+      <li>Frontier Coach AI contextual coaching in the flow of work</li>
+      <li>Capability library curation & continuous expansion</li>
+      <li>Personalised resistance sensing, sponsorship simulation & peer learning activation</li>
+      <li>Single-pane-of-glass experience design across employee, manager & CEO</li>
+    </ul>
+  </div>
+
+  <!-- KEY RESOURCES -->
+  <div class="cell cell-resources">
+    <div class="cell-label"><span class="icon">🔶</span> Key Resources</div>
+    <ul>
+      <li><strong>Frontier AI Coach</strong> — contextual, personalised, always-on coaching agent</li>
+      <li><strong>WorkIQ signal graph</strong> — behavioural data that makes simulation real</li>
+      <li><strong>Capability Library</strong> — ready-to-deploy AI capabilities (like Amazon Prime for change)</li>
+      <li><strong>Simulation Engine</strong> — pre-experience change in your actual context</li>
+      <li><strong>Pioneers Club network</strong> — exclusive cross-industry community</li>
+      <li><strong>Design system</strong> — Tesla-grade clean UI, always up to date</li>
+    </ul>
+  </div>
+
+  <!-- VALUE PROPOSITIONS -->
+  <div class="cell cell-value">
+    <div class="cell-label"><span class="icon">💎</span> Value Propositions</div>
+    <div class="vp-headline">It's a flying car that lifts you above all the traffic and friction</div>
+    <div class="vp-tagline">Gets you to your destination without all the bullshit</div>
+    <ul>
+      <li><strong>Invisible change.</strong> It's just there, when you want it — no programs, no training schedules, no adoption campaigns</li>
+      <li><strong>Time expansion.</strong> Strip out and automate the parts you hate. Do much more of the pieces you love</li>
+      <li><strong>Instant capability.</strong> What you need is available today. A library of capabilities you can avail of — like Amazon Prime</li>
+      <li><strong>See it before it's real.</strong> Simulate the change coming in your context — real resistance, real sponsorship, real coaching — before the change even happens</li>
+      <li><strong>One-sentence onboarding.</strong> "If our Frontier AI Coach pops up with anything, just ask it <em>'what can you do?'</em>"</li>
+      <li><strong>Find the human inside.</strong> AI is the unlock. Bring ideas to life, inspire others, create joy — in your own way</li>
+      <li><strong>Real-time visibility.</strong> See the change as it happens — from individual employee to CEO</li>
+    </ul>
+  </div>
+
+  <!-- CUSTOMER RELATIONSHIPS -->
+  <div class="cell cell-relations">
+    <div class="cell-label"><span class="icon">💙</span> Customer Relationships</div>
+    <ul>
+      <li><strong>Always-on AI coaching</strong> — Frontier Coach simulates how you can use technology in your context so you can see it, experience it, want it, use it</li>
+      <li><strong>Invisible enablement</strong> — change happens in the background; humans feel empowered, not managed</li>
+      <li><strong>Pioneers Club</strong> — exclusive loyalty community that unlocks even more Frontier potential (deliberately scarce)</li>
+      <li><strong>Personalised at every level</strong> — super cool experience whether you're an employee, manager, or CEO</li>
+      <li><strong>Pull, not push</strong> — curiosity-driven discovery replaces mandated adoption</li>
+    </ul>
+  </div>
+
+  <!-- CHANNELS -->
+  <div class="cell cell-channels">
+    <div class="cell-label"><span class="icon">📡</span> Channels</div>
+    <ul>
+      <li><strong>Frontier AI Coach</strong> — pops up contextually in the flow of work (M365, Teams, browser)</li>
+      <li><strong>Single pane of glass</strong> — Tesla-clean dashboard, always up to date, highly automated</li>
+      <li><strong>Cool little envelope</strong> — one-sentence onboarding that sparks curiosity</li>
+      <li><strong>Simulation experiences</strong> — pre-change walkthroughs in your real data context</li>
+      <li><strong>Pioneers Club platform</strong> — exclusive community, cross-industry connection</li>
+      <li><strong>Capability library</strong> — browse, discover, activate — available today</li>
+    </ul>
+  </div>
+
+  <!-- CUSTOMER SEGMENTS -->
+  <div class="cell cell-segments">
+    <div class="cell-label"><span class="icon">🎯</span> Customer Segments</div>
+    <ul>
+      <li><strong>The Maker</strong> (Mert) — wants instant decisions, builds meaningful stuff, creates capabilities for others, drives forward motion of society</li>
+      <li><strong>The Leader</strong> (Cheri) — wants better &amp; faster outcomes, time for innovation, idea-to-experience acceleration, happy &amp; innovative people</li>
+      <li><strong>The Creator</strong> (Robin) — wants time to create, massive intrinsic drive, brings ideas to life, inspires others, creates joy</li>
+      <li><strong>The Optimizer</strong> (Steve) — wants to strip out &amp; automate the hated parts, do much more of the loved parts</li>
+      <li style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(248,113,113,0.15);"><strong>Organisations</strong> becoming Frontier Firms — high % of workforce to the future, AI at full potential, quickly</li>
+    </ul>
+  </div>
+
+  <!-- COST STRUCTURE -->
+  <div class="cell cell-costs">
+    <div class="cell-label"><span class="icon">📊</span> Cost Structure</div>
+    <ul>
+      <li><strong>Platform intelligence layer</strong> — integration with WorkIQ, FabricIQ, FoundryIQ signal infrastructure</li>
+      <li><strong>Frontier AI Coach</strong> — contextual coaching engine, simulation compute, personalisation models</li>
+      <li><strong>Capability library</strong> — curation, quality assurance, continuous expansion &amp; maintenance</li>
+      <li><strong>Experience design</strong> — Tesla-grade design system, multi-persona UX (employee → CEO)</li>
+      <li><strong>Pioneers Club</strong> — community management, event production, cross-industry curation</li>
+      <li><strong>Signal processing</strong> — real-time organisational sensing, resistance detection, change telemetry</li>
+    </ul>
+  </div>
+
+  <!-- REVENUE STREAMS -->
+  <div class="cell cell-revenue">
+    <div class="cell-label"><span class="icon">💰</span> Revenue Streams</div>
+    <ul>
+      <li><strong>Frontier Change platform</strong> — per-employee licensing (the intelligence layer that makes it all work)</li>
+      <li><strong>Capability library</strong> — subscription access to ready-to-deploy AI capabilities</li>
+      <li><strong>Simulation engine</strong> — pre-change experience packages (see it before it's real)</li>
+      <li><strong>Pioneers Club</strong> — premium, exclusive membership (deliberately scarce, high-value community)</li>
+      <li><strong>Frontier Coach premium</strong> — advanced contextual coaching, custom persona training</li>
+      <li><strong>Enterprise acceleration</strong> — fast-track Frontier Firm transformation packages</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ═══════════════ CUSTOMER ZERO ═══════════════ -->
+<div class="customer-zero">
+  <div class="cz-header">
+    <h2>Customer Zero Narratives</h2>
+    <p>Real humans. Real experiences. The Frontier Firm through their eyes.</p>
+  </div>
+  <div class="cz-grid">
+    <div class="cz-card">
+      <div class="cz-name"><span class="cz-avatar">M</span> Mert</div>
+      <div class="cz-quote">"I'm now making decisions instantly that used to take time. It means I build more meaningful stuff that are to the benefit of other people and other AI. It means faster outcomes, more innovation, growing curiosity. I get to contribute to the forward motion of society by creating capabilities for others."</div>
+    </div>
+    <div class="cz-card">
+      <div class="cz-name"><span class="cz-avatar">C</span> Cheri</div>
+      <div class="cz-quote">"It's about time saved and the decisions that get made. It all produces better and faster outcomes. That leads to more opportunities, creates more time for more innovation. The time from idea to experience is accelerated. My people get to be happy and innovative! It allows me to make my people happy!"</div>
+    </div>
+    <div class="cz-card">
+      <div class="cz-name"><span class="cz-avatar">R</span> Robin</div>
+      <div class="cz-quote">"It creates the time that allows me to create. That enables a massive intrinsic driver for me. It means I can make things that then move other people. That means I can bring my ideas to life, inspire others, and create joy!"</div>
+    </div>
+    <div class="cz-card">
+      <div class="cz-name"><span class="cz-avatar">S</span> Steve</div>
+      <div class="cz-quote">"It means I can strip out and automate the parts of my job that I hate, and do much more of the pieces that I love."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ EXPERIENCE PRINCIPLES ═══════════════ -->
+<div class="experience-strip">
+  <h2>The Frontier Change Experience</h2>
+  <p class="sub">What it feels like — for the human on the other side</p>
+  <div class="exp-grid">
+    <div class="exp-card">
+      <div class="exp-icon">🚗→🚀</div>
+      <div class="exp-title">Flying Car, Not Traffic Jam</div>
+      <div class="exp-desc">It lifts you above all the friction. No programs, no adoption campaigns, no change fatigue. Just a direct line to where you want to be.</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">📦</div>
+      <div class="exp-title">Amazon Prime for Change</div>
+      <div class="exp-desc">What you need is available today. A library of capabilities ready to deploy. No waiting. No ordering. No approval chains.</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">✉️</div>
+      <div class="exp-title">One-Sentence Onboarding</div>
+      <div class="exp-desc">"If our Frontier AI Coach pops up with anything, just ask it 'what can you do?'" — delivered in a cool little envelope. That's it. That's all the training.</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🔮</div>
+      <div class="exp-title">See It Before It's Real</div>
+      <div class="exp-desc">Simulate the change coming — in your context, with your data, showing real resistance and real coaching — before the change even happens.</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🪟</div>
+      <div class="exp-title">Tesla Single Pane of Glass</div>
+      <div class="exp-desc">Super clean. Always up to date. Easy to use. Personalised. Highly automated. Beautiful whether you're an employee, a manager, or the CEO.</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">👁️</div>
+      <div class="exp-title">Real-Time Change Visibility</div>
+      <div class="exp-desc">You will have real-time visibility on the change as it happens. Not quarterly reports. Not dashboards. Living, breathing change intelligence.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PLATFORM LAYER ═══════════════ -->
+<div class="platform-strip">
+  <div class="platform-node pn-iq">WorkIQ</div>
+  <span class="platform-arrow">→</span>
+  <div class="platform-node pn-iq">FabricIQ</div>
+  <span class="platform-arrow">→</span>
+  <div class="platform-node pn-iq">FoundryIQ</div>
+  <span class="platform-arrow">→</span>
+  <div class="platform-node pn-frontier">⚡ Frontier Change</div>
+</div>
+
+<div class="footer">
+  Studio 72 · Frontier Change · Business Model Canvas
+</div>
+
+</body>
+</html>
